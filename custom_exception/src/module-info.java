@@ -1,0 +1,3 @@
+module custom_exception {
+	
+}
