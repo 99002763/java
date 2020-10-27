@@ -2,37 +2,57 @@ package com.mongo.service;
 
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.mongo.dao.StudentRepository;
 import com.mongo.exception.StudentNotFoundException;
 import com.mongo.model.Student;
 
+
 @Service
 public class StudentServiceImpl implements StudentService{
+	@Autowired
+	StudentRepository studentRepository;
 
 	@Override
 	public Student addStudent(Student student) {
 		// TODO Auto-generated method stub
-		return null;
+		Student newStudent = studentRepository.save(student);
+		return newStudent;
 	}
 
 	@Override
-	public boolean deleteStudent(Integer studentid) throws StudentNotFoundException {
+	public Student getStudentById(int studentId) throws StudentNotFoundException {
 		// TODO Auto-generated method stub
-		return false;
+		return studentRepository.findById(studentId)
+				.orElseThrow(()-> new StudentNotFoundException("Id not available"));
 	}
 
 	@Override
-	public Student getStudentById(Integer studentid) throws StudentNotFoundException {
+	public boolean deleteStudent(int studentId) throws StudentNotFoundException {
 		// TODO Auto-generated method stub
-		return null;
+		studentRepository.deleteById(studentId);
+		return true;
 	}
-
-	
 
 	@Override
-	public List<Student> getAllStudent() {
+	public List<Student> getAllStudents() {
 		// TODO Auto-generated method stub
-		return null;
+		return studentRepository.findAll();
 	}
+
+	@Override
+	public List<Student> getStudentsByCity(String city) throws StudentNotFoundException {
+		// TODO Auto-generated method stub
+		return studentRepository.findByAddressCity(city);
+	}
+
+	@Override
+	public List<Student> getStudentsByDept(String dept) throws StudentNotFoundException {
+		// TODO Auto-generated method stub
+		
+		return studentRepository.findByDept(dept);
+	}
+
 }

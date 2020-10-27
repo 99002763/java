@@ -1,10 +1,13 @@
 package com.mongo.model;
 
+import org.springframework.stereotype.Component;
+
+@Component
 public class Address {
 	String city;
-    String state;
-    
-    
+	String state;
+	
+	
 	public Address() {
 		super();
 		// TODO Auto-generated constructor stub
@@ -32,5 +35,5 @@ public class Address {
 	}
 	
 	
-    
+	
 }
