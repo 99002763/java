@@ -20,8 +20,8 @@ import com.mongo.service.StudentService;
 
 
 
-@RestController
-@RequestMapping("/student-api")
+//@RestController
+//@RequestMapping("/student-api")
 public class StudentController {
 	@Autowired
 	StudentService studentService;
